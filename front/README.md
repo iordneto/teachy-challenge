@@ -1,33 +1,36 @@
-# Teachy Frontend Challenge
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Instruções Gerais
+## Getting Started
 
-1. *Clone* este repositório
-2. Em seu *fork*, atenda os casos de usos especificados
-3. Nos notifique de sua entrega para que possamos dar prosseguimento ao processo.
+First, run the development server:
 
-## Desafio
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-A ideia é conhecer um pouco sobre como você trabalha e pensa de forma prática. O projeto estar no repositório e documentados no README da raiz do projeto. Abaixo temos detalhes sobre os requisitos de cada desafio.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### 1. Desenvolvimento frontend
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-Implementação de uma aplicação web para a construção de slides de forma interativa. Use redux para armazenamento de informações.
+## Learn More
 
-- O usuário deverá poder criar um documento com uma ou main páginas
-- O usuário deverá poder arrastar ou fazer upload de imagens para o domento e cortá-lo/redimensioná-lo
-- a pessoa poderá escrever no documento Canva-like
+To learn more about Next.js, take a look at the following resources:
 
-Segue uma referência visual:
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-<img width="789" alt="Captura de Tela 2024-07-18 às 17 49 12" src="https://static-cse.canva.com/blob/1344486/feature_StockImages_how-to2x.03f6bd98.jpg">
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-Ela precisa ser desenvolvida utilizando *NextJS* e *Tailwind*. Também é necessária uma instrução de como rodar o projeto.
+## Deploy on Vercel
 
-Referências:
- - https://tailwindcss.com/
- - https://nextjs.org/
- - https://react.dev/
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Sinta-se à vontade para tirar dúvidas.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
