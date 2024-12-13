@@ -35,13 +35,14 @@ const Page = ({ pageUuid }: Props) => {
         style={{ maxWidth: width }}
       >
         <button onClick={handleAddNewPage}>
-          <IoAdd size={20}></IoAdd>
+          <IoAdd color="#333333" size={20}></IoAdd>
         </button>
         <button onClick={() => handleRemovePage(pageUuid)}>
-          <IoTrash size={20} />
+          <IoTrash color="#333333" size={20} />
         </button>
         <button onClick={() => handleAddText(pageUuid)}>
-          <IoText size={20} /> {/* Botão para adicionar texto */}
+          <IoText color="#333333" size={20} />{" "}
+          {/* Botão para adicionar texto */}
         </button>
       </div>
       <div className="bg-white" style={{ width, height }} onDrop={handleDrop}>
