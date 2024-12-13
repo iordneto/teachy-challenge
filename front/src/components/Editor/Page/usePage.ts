@@ -1,10 +1,14 @@
 import db from "@/lib/dexieClient"; // Certifique-se de que o db esteja corretamente configurado
+import { addPage } from "@/lib/store/editorSlice";
 import Konva from "konva";
 import { KonvaEventObject } from "konva/lib/Node";
 import { useEffect, useRef, useState } from "react";
-import { CanvasImage } from "./types";
+import { useDispatch } from "react-redux";
+import { CanvasImage } from "../types";
 
-const useEditor = () => {
+const usePage = () => {
+  const dispatch = useDispatch();
+
   const [images, setImages] = useState<CanvasImage[]>([]);
   const [imagePreviews, setImagePreviews] = useState<{
     [key: string]: HTMLImageElement;
@@ -71,15 +75,20 @@ const useEditor = () => {
     }
   };
 
+  const handleAddNewPage = () => {
+    dispatch(addPage());
+  };
+
   return {
     imagePreviews,
     images,
     selectedImage,
     transformerRef,
+    handleAddNewPage,
     handleDrop,
     handleSelect,
     handleStageClick,
   };
 };
 
-export default useEditor;
+export default usePage;
