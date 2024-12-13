@@ -1,5 +1,13 @@
 # Next.js Slide Editor App
 
+## Demonstração
+
+Veja abaixo uma demonstração do aplicativo em ação:
+
+![Demonstração do App](./public/assets/demo1.gif)
+![Demonstração do App](./public/assets/demo2.gif)
+![Demonstração do App](./public/assets/demo3.gif)
+
 ## Sobre o Projeto
 
 Este projeto é um aplicativo baseado no famoso Canva, mas com funcionalidades personalizadas para facilitar a criação e edição de slides. Com ele, você pode:
@@ -12,6 +20,7 @@ Este projeto é um aplicativo baseado no famoso Canva, mas com funcionalidades p
 
 ### Funcionalidades Principais
 
+- **Upload de Images:** Para adicionar imagens ao projeto basta arrastar sobre qualquer área do app ou clicar no botão de upload
 - **Arraste e Solte:** Para adicionar imagens a um slide, basta arrastá-las para o editor.
 - **Criação de Textos:** Clique no ícone acima da página para adicionar textos.
 - **Interface Intuitiva:** O layout é simples e fácil de usar, garantindo uma ótima experiência para criação de conteúdo visual.
@@ -92,9 +101,19 @@ Depois de instalar as dependências do sistema, siga os passos abaixo para confi
 4. **Criando Múltiplas Páginas:**
    - Navegue entre as páginas e use as ferramentas disponíveis para criar slides adicionais.
 
-## Contribuições
+# Futuras Possíveis Melhorias
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests com melhorias e sugestões.
+Estamos continuamente trabalhando para melhorar o aplicativo. Algumas melhorias e novos recursos que estão planejados para futuras versões incluem:
+
+- **Clique na Imagem para Editar**: Permitir que os usuários cliquem diretamente nas imagens para acessar as opções de edição, facilitando a navegação e edição no slide.
+
+- **Implementação de Corte (Crop) em Imagens**: Adicionar uma ferramenta de corte para que os usuários possam ajustar e cortar as imagens antes de usá-las nos slides.
+
+- **Lista Infinita com Virtualização**: Implementar uma lista infinita com virtualização para garantir o desempenho otimizado ao trabalhar com grandes quantidades de imagens ou slides.
+
+- **Transições e Animações nas Páginas**: Adicionar transições e animações ao criar ou alternar entre páginas para melhorar a experiência visual e interatividade.
+
+- **Deleção de Imagens e Textos**: Permitir que os usuários possam excluir imagens ou textos diretamente do slide, oferecendo mais flexibilidade e controle durante o processo de criação.
 
 ## Licença
 
