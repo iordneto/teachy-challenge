@@ -13,6 +13,8 @@ import { useDispatch } from "react-redux";
 
 interface DragAndDropContextProps {
   onImageUpload: (file: File) => void;
+  isUploading: boolean;
+  imagePreview: string | null;
 }
 
 const DragAndDropContext = createContext<DragAndDropContextProps | undefined>(
@@ -30,11 +32,13 @@ export const useDragAndDrop = () => {
 export const DragAndDropProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [, setImagePreview] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   const handleImageUpload = useCallback(
     async (file: File) => {
+      setIsUploading(true);
       const previewUrl = URL.createObjectURL(file);
       setImagePreview(previewUrl);
 
@@ -55,6 +59,7 @@ export const DragAndDropProvider: React.FC<{ children: ReactNode }> = ({
       } catch (error) {
         console.error("Erro ao salvar a imagem no IndexedDB", error);
       }
+      setIsUploading(false);
     },
     [dispatch]
   );
@@ -82,7 +87,9 @@ export const DragAndDropProvider: React.FC<{ children: ReactNode }> = ({
   }, [handleImageUpload]);
 
   return (
-    <DragAndDropContext.Provider value={{ onImageUpload: handleImageUpload }}>
+    <DragAndDropContext.Provider
+      value={{ onImageUpload: handleImageUpload, isUploading, imagePreview }}
+    >
       {children}
     </DragAndDropContext.Provider>
   );
