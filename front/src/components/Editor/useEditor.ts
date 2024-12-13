@@ -1,5 +1,7 @@
 import db from "@/lib/dexieClient"; // Certifique-se de que o db esteja corretamente configurado
-import { useEffect, useState } from "react";
+import Konva from "konva";
+import { KonvaEventObject } from "konva/lib/Node";
+import { useEffect, useRef, useState } from "react";
 import { CanvasImage } from "./types";
 
 const useEditor = () => {
@@ -44,10 +46,36 @@ const useEditor = () => {
     }
   };
 
+  const transformerRef = useRef<Konva.Transformer | null>(null);
+
+  const [selectedImage, setSelectedImage] = useState<
+    Konva.Shape | Konva.Stage | null
+  >(null);
+  const handleSelect = (e: KonvaEventObject<MouseEvent | Event>) => {
+    setSelectedImage(e.target);
+  };
+
+  useEffect(() => {
+    if (selectedImage && transformerRef.current) {
+      transformerRef.current.nodes([selectedImage]);
+      transformerRef.current.getLayer()?.batchDraw();
+    }
+  }, [selectedImage]);
+
+  const handleStageClick = (e: KonvaEventObject<MouseEvent | Event>) => {
+    if (e.target === e.target.getStage()) {
+      setSelectedImage(null);
+    }
+  };
+
   return {
-    images,
     imagePreviews,
+    images,
+    selectedImage,
+    transformerRef,
     handleDrop,
+    handleSelect,
+    handleStageClick,
   };
 };
 
