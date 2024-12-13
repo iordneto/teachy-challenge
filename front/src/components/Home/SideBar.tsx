@@ -9,12 +9,12 @@ const Sidebar = () => {
   const activeTab = useSelector((state: RootState) => state.ui.activeTab);
 
   const tabs = [
-    { id: "text", component: <IoText size={30} />, label: "Text" },
     { id: "uploads", component: <IoCloudUpload size={25} />, label: "Uploads" },
+    { id: "text", component: <IoText size={30} />, label: "Text" },
   ];
 
   return (
-    <aside className="flex flex-col gap-3 border-r-1 border-solid border-black p-4">
+    <aside className="flex flex-col gap-3 border-r-[1px] border-solid border-[rgba(57,76,96,.05)] p-4">
       {tabs.map((tab) => (
         <div
           key={tab.id}

@@ -10,7 +10,7 @@ const ImageList: React.FC = memo(
     const { images } = useImageList();
 
     return (
-      <div className="grid grid-cols-3 gap-2 p-4">
+      <div className="grid grid-cols-3 gap-2 ">
         {images?.map((image) => (
           <ImageItem image={image} key={image.id} />
         ))}

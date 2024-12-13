@@ -13,7 +13,7 @@ const Editor = () => {
 
   return (
     <div
-      className="flex flex-1 flex-col gap-10 justify-center items-center bg-slate-300 p-10"
+      className="flex flex-1 flex-col gap-10 justify-center items-center bg-slate-200 p-10"
       onDragOver={(e) => e.preventDefault()}
     >
       {pageComponents}
