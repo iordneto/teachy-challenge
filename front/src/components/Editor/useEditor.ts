@@ -57,7 +57,6 @@ const useEditor = () => {
   };
 
   useEffect(() => {
-    console.log("selectedImage", selectedImage);
     if (selectedImage) transformerRef.current?.nodes([selectedImage]);
     const layer = transformerRef.current?.getLayer();
     layer?.batchDraw();
@@ -65,7 +64,6 @@ const useEditor = () => {
 
   const handleStageClick = (e: KonvaEventObject<MouseEvent>) => {
     if (e.target === e.target.getStage()) {
-      console.log("deselect");
       setSelectedImage(null);
       transformerRef.current?.nodes([]);
       const layer = transformerRef.current?.getLayer();
