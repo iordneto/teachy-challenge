@@ -1,4 +1,4 @@
-import db from "@/lib/dexieClient"; // Certifique-se de que o db esteja corretamente configurado
+import db from "@/lib/dexieClient";
 import { addPage, removePage } from "@/lib/store/editorSlice";
 import Konva from "konva";
 import { KonvaEventObject } from "konva/lib/Node";
@@ -13,40 +13,63 @@ const usePage = () => {
   const [imagePreviews, setImagePreviews] = useState<{
     [key: string]: HTMLImageElement;
   }>({});
+  const [pageTexts, setPageTexts] = useState<{
+    [key: string]: { id: string; text: string; x: number; y: number }[];
+  }>({});
+  const [editingTextId, setEditingTextId] = useState<string | null>(null);
+  const [editingText, setEditingText] = useState<string>("");
 
   const transformerRef = useRef<Konva.Transformer | null>(null);
   const [selectedImage, setSelectedImage] = useState<Konva.Image | null>(null);
 
+  const loadImageFromDb = async (imageId: string) => {
+    const storedImage = await db.images.get(parseInt(imageId));
+
+    if (storedImage) {
+      const img = new Image();
+      img.src = URL.createObjectURL(new Blob([storedImage.fileData]));
+      img.onload = () => {
+        setImagePreviews((prev) => ({
+          ...prev,
+          [imageId]: img,
+        }));
+      };
+    }
+  };
+
   useEffect(() => {
-    const loadImageFromDb = async (imageId: string) => {
+    images.forEach((image) => {
+      loadImageFromDb(image.id);
+    });
+  }, [images]);
+
+  const handleDrop = async (e: React.DragEvent) => {
+    e.preventDefault();
+    const imageId = e.dataTransfer.getData("text");
+
+    if (imageId) {
       const storedImage = await db.images.get(parseInt(imageId));
 
       if (storedImage) {
         const img = new Image();
         img.src = URL.createObjectURL(new Blob([storedImage.fileData]));
         img.onload = () => {
-          setImagePreviews((prev) => ({
+          const ratio = img.height / img.width;
+          const newWidth = 150;
+          const newHeight = newWidth * ratio;
+
+          setImages((prev) => [
             ...prev,
-            [imageId]: img,
-          }));
+            {
+              id: imageId,
+              x: e.clientX,
+              y: e.clientY,
+              width: newWidth,
+              height: newHeight,
+            },
+          ]);
         };
       }
-    };
-
-    images.forEach((image) => {
-      loadImageFromDb(image.id);
-    });
-  }, [images]);
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    const imageId = e.dataTransfer.getData("text");
-
-    if (imageId) {
-      setImages((prev) => [
-        ...prev,
-        { id: imageId, x: e.clientX, y: e.clientY, width: 100, height: 100 },
-      ]);
     }
   };
 
@@ -83,16 +106,65 @@ const usePage = () => {
     dispatch(removePage(pageUuid));
   };
 
+  const handleAddText = (pageUuid: string) => {
+    const newTextItem = {
+      id: Date.now().toString(),
+      text: "Novo Texto",
+      x: 50,
+      y: 50,
+    };
+
+    setPageTexts((prev) => {
+      const updatedTexts = { ...prev };
+      if (!updatedTexts[pageUuid]) {
+        updatedTexts[pageUuid] = [];
+      }
+      updatedTexts[pageUuid].push(newTextItem);
+      return updatedTexts;
+    });
+  };
+
+  const handleEditText = (pageUuid: string, textId: string) => {
+    const textItem = pageTexts[pageUuid]?.find((item) => item.id === textId);
+    if (textItem) {
+      setEditingTextId(textId);
+      setEditingText(textItem.text);
+    }
+  };
+
+  const handleSaveText = (
+    pageUuid: string,
+    newText: string,
+    textId: string
+  ) => {
+    if (textId && newText) {
+      const updatedTexts = pageTexts[pageUuid]?.map((item) =>
+        item.id === textId ? { ...item, text: newText } : item
+      );
+      setPageTexts((prev) => ({
+        ...prev,
+        [pageUuid]: updatedTexts || [],
+      }));
+    }
+  };
+
   return {
     imagePreviews,
     images,
+    pageTexts,
     selectedImage,
     transformerRef,
     handleAddNewPage,
+    handleAddText,
     handleDrop,
     handleRemovePage,
     handleSelect,
     handleStageClick,
+    handleEditText,
+    handleSaveText,
+    editingTextId,
+    editingText,
+    setEditingText,
   };
 };
 

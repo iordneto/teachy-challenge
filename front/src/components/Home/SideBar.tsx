@@ -1,6 +1,6 @@
 import { RootState } from "@/lib/store/store";
 import { setActiveTab } from "@/lib/store/uiSlice";
-import { IoCloudUpload, IoText } from "react-icons/io5";
+import { IoCloudUpload } from "react-icons/io5";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,7 +10,7 @@ const Sidebar = () => {
 
   const tabs = [
     { id: "uploads", component: <IoCloudUpload size={25} />, label: "Uploads" },
-    { id: "text", component: <IoText size={30} />, label: "Text" },
+    /* { id: "text", component: <IoText size={30} />, label: "Text" }, */
   ];
 
   return (
