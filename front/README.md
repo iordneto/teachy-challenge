@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Slide Editor App
 
-## Getting Started
+## Sobre o Projeto
 
-First, run the development server:
+Este projeto é um aplicativo baseado no famoso Canva, mas com funcionalidades personalizadas para facilitar a criação e edição de slides. Com ele, você pode:
+
+- Fazer upload de múltiplas imagens.
+- Adicionar imagens ao editor de slides.
+- Redimensionar e rotacionar imagens.
+- Adicionar textos.
+- Criar múltiplas páginas.
+
+### Funcionalidades Principais
+
+- **Arraste e Solte:** Para adicionar imagens a um slide, basta arrastá-las para o editor.
+- **Criação de Textos:** Clique no ícone acima da página para adicionar textos.
+- **Interface Intuitiva:** O layout é simples e fácil de usar, garantindo uma ótima experiência para criação de conteúdo visual.
+
+## Requisitos de Instalação
+
+### Dependências do Sistema
+
+Antes de começar, certifique-se de que seu sistema tem as bibliotecas necessárias para rodar o projeto.
+
+#### macOS
+
+No macOS, rode o seguinte comando no terminal para instalar as dependências:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+brew install pkg-config cairo pango libpng jpeg giflib librsvg
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Linux
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+No Linux, utilize o gerenciador de pacotes da sua distribuição. Para distribuições baseadas em Debian/Ubuntu, por exemplo:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+sudo apt-get install pkg-config libcairo2-dev libpango1.0-dev libpng-dev libjpeg-dev libgif-dev librsvg2-dev
+```
 
-## Learn More
+#### Windows
 
-To learn more about Next.js, take a look at the following resources:
+No Windows, você pode instalar as bibliotecas via MSYS2:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Instale o [MSYS2](https://www.msys2.org/).
+2. Abra o terminal do MSYS2 e rode:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pacman -S mingw-w64-x86_64-pkg-config mingw-w64-x86_64-cairo mingw-w64-x86_64-pango mingw-w64-x86_64-libpng mingw-w64-x86_64-librsvg
+```
 
-## Deploy on Vercel
+### Configuração do Projeto
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Depois de instalar as dependências do sistema, siga os passos abaixo para configurar o projeto:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clone o repositório:
+
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+   cd <PASTA_DO_PROJETO>
+   ```
+
+2. Instale as dependências do projeto:
+
+   ```bash
+   npm install
+   ```
+
+3. Inicie o servidor de desenvolvimento:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Abra o navegador em [http://localhost:3000](http://localhost:3000) para acessar o app.
+
+## Como Usar
+
+1. **Adicionando Imagens:**
+
+   - Faça o upload das imagens para a biblioteca.
+   - Arraste as imagens desejadas para o editor de slides.
+
+2. **Editando Imagens:**
+
+   - Redimensione ou rotacione as imagens diretamente no editor.
+
+3. **Adicionando Textos:**
+
+   - Clique no ícone de texto localizado acima da página para adicionar novos textos.
+
+4. **Criando Múltiplas Páginas:**
+   - Navegue entre as páginas e use as ferramentas disponíveis para criar slides adicionais.
+
+## Contribuições
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests com melhorias e sugestões.
+
+## Licença
+
+Este projeto está licenciado sob a [Licença MIT](LICENSE).
