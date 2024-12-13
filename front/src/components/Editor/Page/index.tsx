@@ -4,12 +4,17 @@ import usePage from "./usePage";
 const width = 400;
 const height = 400;
 
-const Page = () => {
+type Props = {
+  pageUuid: string;
+};
+
+const Page = ({ pageUuid }: Props) => {
   const {
     images,
     imagePreviews,
     transformerRef,
     handleAddNewPage,
+    handleRemovePage,
     handleDrop,
     handleSelect,
     handleStageClick,
@@ -22,6 +27,7 @@ const Page = () => {
         style={{ maxWidth: width }}
       >
         <button onClick={handleAddNewPage}>Add new page</button>
+        <button onClick={() => handleRemovePage(pageUuid)}>Remove Page</button>
       </div>
       <div className="bg-white" style={{ width, height }} onDrop={handleDrop}>
         <Stage width={width} height={height} onClick={handleStageClick}>

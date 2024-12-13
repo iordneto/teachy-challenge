@@ -1,5 +1,5 @@
 import db from "@/lib/dexieClient"; // Certifique-se de que o db esteja corretamente configurado
-import { addPage } from "@/lib/store/editorSlice";
+import { addPage, removePage } from "@/lib/store/editorSlice";
 import Konva from "konva";
 import { KonvaEventObject } from "konva/lib/Node";
 import { useEffect, useRef, useState } from "react";
@@ -79,6 +79,10 @@ const usePage = () => {
     dispatch(addPage());
   };
 
+  const handleRemovePage = (pageUuid: string) => {
+    dispatch(removePage(pageUuid));
+  };
+
   return {
     imagePreviews,
     images,
@@ -86,6 +90,7 @@ const usePage = () => {
     transformerRef,
     handleAddNewPage,
     handleDrop,
+    handleRemovePage,
     handleSelect,
     handleStageClick,
   };

@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 import Page from "./Page";
 
 const Editor = () => {
-  const pagesCount = useSelector((state: RootState) => state.editor.pagesCount);
+  const pages = useSelector((state: RootState) => state.editor.pages);
 
-  const pageComponents = Array.from({ length: pagesCount }).map((_, index) => (
-    <Page key={index} />
+  const pageComponents = pages.map((page) => (
+    <Page key={page.id} pageUuid={page.id} />
   ));
 
   return (
