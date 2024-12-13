@@ -1,3 +1,4 @@
+import { IoAdd, IoTrash } from "react-icons/io5";
 import { Image as KonvaImage, Layer, Stage, Transformer } from "react-konva";
 import usePage from "./usePage";
 
@@ -23,11 +24,15 @@ const Page = ({ pageUuid }: Props) => {
   return (
     <div className="flex flex-col ">
       <div
-        className="flex flex-row gap-4 justify-end w-full"
+        className="flex flex-row gap-2 justify-end w-full py-2"
         style={{ maxWidth: width }}
       >
-        <button onClick={handleAddNewPage}>Add new page</button>
-        <button onClick={() => handleRemovePage(pageUuid)}>Remove Page</button>
+        <button onClick={handleAddNewPage}>
+          <IoAdd size={20}></IoAdd>
+        </button>
+        <button onClick={() => handleRemovePage(pageUuid)}>
+          <IoTrash size={20} />
+        </button>
       </div>
       <div className="bg-white" style={{ width, height }} onDrop={handleDrop}>
         <Stage width={width} height={height} onClick={handleStageClick}>
