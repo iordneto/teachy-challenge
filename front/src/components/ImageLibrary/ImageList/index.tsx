@@ -1,10 +1,12 @@
 "use client";
+import { useDragAndDrop } from "@/contexts/DragAndDropContext";
 import React, { memo } from "react";
 import ImageItem from "./ImageItem";
 import useImageList from "./useImageList";
 
 const ImageList: React.FC = memo(
   () => {
+    const { isUploading } = useDragAndDrop();
     const { images } = useImageList();
 
     return (
@@ -12,6 +14,7 @@ const ImageList: React.FC = memo(
         {images?.map((image) => (
           <ImageItem image={image} key={image.id} />
         ))}
+        {isUploading && <ImageItem />}
       </div>
     );
   },
