@@ -7,9 +7,11 @@ const useImageItem = () => {
     return URL.createObjectURL(blob);
   };
 
-  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-    const target = e.target as HTMLDivElement;
-    e.dataTransfer.setData("text", target.id);
+  const handleDragStart = (
+    e: React.DragEvent<HTMLDivElement>,
+    imageId?: number
+  ) => {
+    e.dataTransfer.setData("text", imageId?.toString() || "");
     setIsDragging(true);
   };
 

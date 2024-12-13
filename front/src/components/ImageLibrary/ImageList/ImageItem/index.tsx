@@ -29,7 +29,7 @@ const ImageItem = React.memo(({ image }: { image?: UserImage }) => {
       className={`w-[100px] h-[100px] rounded-[8px] bg-transparent bg-cover bg-center cursor-pointer overflow-hidden
         ${!backgroundImage && "bg-slate-200"}
         ${isDragging ? "cursor-grabbing" : "cursor-grab"} `}
-      onDragStart={handleDragStart}
+      onDragStart={(e) => handleDragStart(e, image?.id)}
       onDragEnd={handleDragEnd}
       draggable
     >
