@@ -1,11 +1,15 @@
 "use client";
+import db from "@/lib/dexieClient";
+import { addImage } from "@/lib/store/imageSlice";
 import React, {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useState,
 } from "react";
+import { useDispatch } from "react-redux";
 
 interface DragAndDropContextProps {
   onImageUpload: (file: File) => void;
@@ -27,37 +31,55 @@ export const DragAndDropProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [, setImagePreview] = useState<string | null>(null);
+  const dispatch = useDispatch();
 
-  // Função para lidar com o upload da imagem
-  const handleImageUpload = (file: File) => {
-    setImagePreview(URL.createObjectURL(file)); // Gerar o preview da imagem
-    console.log("Imagem carregada:", file); // Você pode armazenar ou fazer upload aqui
-  };
+  const handleImageUpload = useCallback(
+    async (file: File) => {
+      const previewUrl = URL.createObjectURL(file);
+      setImagePreview(previewUrl);
 
-  // Registrar os eventos de drag and drop globalmente
+      console.log("Imagem carregada:", file);
+
+      try {
+        const id = await db.images.add({
+          fileName: file.name,
+          fileData: await file.arrayBuffer(),
+        });
+        console.log("Imagem salva no IndexedDB com id:", id);
+
+        if (!id) {
+          throw new Error("Erro ao salvar a imagem no IndexedDB");
+        }
+
+        dispatch(addImage({ id, fileName: file.name }));
+      } catch (error) {
+        console.error("Erro ao salvar a imagem no IndexedDB", error);
+      }
+    },
+    [dispatch]
+  );
+
   useEffect(() => {
     const handleDrop = (e: DragEvent) => {
       e.preventDefault();
       const file = e.dataTransfer?.files[0];
       if (file && file.type.startsWith("image/")) {
-        handleImageUpload(file); // Chama a função de upload de imagem
+        handleImageUpload(file);
       }
     };
 
     const handleDragOver = (e: DragEvent) => {
-      e.preventDefault(); // Necessário para permitir o "drop"
+      e.preventDefault();
     };
 
-    // Adicionando os ouvintes de evento no `document` globalmente
     document.addEventListener("dragover", handleDragOver);
     document.addEventListener("drop", handleDrop);
 
-    // Limpeza dos ouvintes de evento quando o componente for desmontado
     return () => {
       document.removeEventListener("dragover", handleDragOver);
       document.removeEventListener("drop", handleDrop);
     };
-  }, []);
+  }, [handleImageUpload]);
 
   return (
     <DragAndDropContext.Provider value={{ onImageUpload: handleImageUpload }}>
