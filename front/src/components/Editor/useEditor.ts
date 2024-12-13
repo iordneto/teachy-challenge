@@ -48,6 +48,7 @@ const useEditor = () => {
 
   const handleSelect = (e: KonvaEventObject<MouseEvent>) => {
     const target = e.target as Konva.Image;
+
     if (target === selectedImage) {
       setSelectedImage(null);
     } else {
@@ -56,15 +57,19 @@ const useEditor = () => {
   };
 
   useEffect(() => {
-    if (selectedImage) {
-      transformerRef.current?.nodes([selectedImage]);
-      transformerRef.current?.getLayer()?.batchDraw();
-    }
+    console.log("selectedImage", selectedImage);
+    if (selectedImage) transformerRef.current?.nodes([selectedImage]);
+    const layer = transformerRef.current?.getLayer();
+    layer?.batchDraw();
   }, [selectedImage]);
 
   const handleStageClick = (e: KonvaEventObject<MouseEvent>) => {
     if (e.target === e.target.getStage()) {
+      console.log("deselect");
       setSelectedImage(null);
+      transformerRef.current?.nodes([]);
+      const layer = transformerRef.current?.getLayer();
+      layer?.batchDraw();
     }
   };
 

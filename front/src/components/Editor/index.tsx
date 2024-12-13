@@ -9,7 +9,6 @@ const Editor = () => {
   const {
     images,
     imagePreviews,
-    selectedImage,
     transformerRef,
     handleDrop,
     handleSelect,
@@ -40,17 +39,16 @@ const Editor = () => {
                 onDblTap={handleSelect}
               />
             ))}
-            {selectedImage && (
-              <Transformer
-                ref={transformerRef}
-                boundBoxFunc={(oldBox, newBox) => {
-                  if (newBox.width < 20 || newBox.height < 20) {
-                    return oldBox;
-                  }
-                  return newBox;
-                }}
-              />
-            )}
+
+            <Transformer
+              ref={transformerRef}
+              boundBoxFunc={(oldBox, newBox) => {
+                if (newBox.width < 20 || newBox.height < 20) {
+                  return oldBox;
+                }
+                return newBox;
+              }}
+            />
           </Layer>
         </Stage>
       </div>
