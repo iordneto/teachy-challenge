@@ -35,7 +35,9 @@ const Editor = () => {
                 image={imagePreviews[image.id]}
                 draggable
                 onClick={handleSelect}
+                onDblClick={handleSelect}
                 onTap={handleSelect}
+                onDblTap={handleSelect}
               />
             ))}
             {selectedImage && (
